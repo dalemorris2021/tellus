@@ -10,7 +10,7 @@ lazy_static! {
     };
 }
 
-/// Prints to the host through the serial interface.
+/// prints to the host through the serial interface
 #[macro_export]
 macro_rules! serial_print {
     ($($arg:tt)*) => {
@@ -18,7 +18,7 @@ macro_rules! serial_print {
     };
 }
 
-/// Prints to the host through the serial interface, appending a newline.
+/// prints to the host through the serial interface, appending a newline
 #[macro_export]
 macro_rules! serial_println {
     () => ($crate::serial_print!("\n"));
