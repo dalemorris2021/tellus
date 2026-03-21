@@ -7,28 +7,19 @@
 use core::panic::PanicInfo;
 use tellus::println;
 
-/// this function is the entry point
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! {
-    println!("Hello, World{}", "!");
-
-    #[cfg(test)]
     test_main();
 
     loop {}
 }
 
-/// this function is called on panic
-#[cfg(not(test))]
-#[panic_handler]
-fn panic(info: &PanicInfo) -> ! {
-    println!("{}", info);
-    loop {}
-}
-
-/// this function is called on panic
-#[cfg(test)]
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     tellus::test_panic_handler(info)
+}
+
+#[test_case]
+fn test_println() {
+    println!("test_println output");
 }
