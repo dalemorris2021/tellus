@@ -10,11 +10,9 @@ use tellus::println;
 /// this function is the entry point
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! {
-    println!("Hello, World{}", "!");
+    println!("Hello, world!");
 
     tellus::init();
-
-    x86_64::instructions::interrupts::int3();
 
     fn stack_overflow() {
         stack_overflow();
@@ -26,8 +24,8 @@ pub extern "C" fn _start() -> ! {
     #[cfg(test)]
     test_main();
 
-    println!("It did not crash~");
-    loop {}
+    println!("It did not crash!");
+    tellus::hlt_loop()
 }
 
 /// this function is called on panic
@@ -35,7 +33,7 @@ pub extern "C" fn _start() -> ! {
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
-    loop {}
+    tellus::hlt_loop();
 }
 
 /// this function is called on panic
